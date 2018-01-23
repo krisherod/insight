@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: /home/kris/Desktop/data_generator/quickstart/src/main/java
+Main-Class: Test
+
