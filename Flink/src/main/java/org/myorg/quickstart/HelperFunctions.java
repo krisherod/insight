@@ -34,9 +34,9 @@ public class HelperFunctions {
 
 
 
-    public static class TupleToString implements MapFunction<Tuple6<String, String, Float, String, String, String>, String> {
+    public static class TupleToString implements MapFunction<Tuple6<Integer, Integer, Float, String, String, String>, String> {
         @Override
-        public String map(Tuple6<String, String, Float, String, String, String> value) throws Exception {
+        public String map(Tuple6<Integer, Integer, Float, String, String, String> value) throws Exception {
             return value.f0 + "" + value.f1 + "" + String.valueOf(value.f2) + "" + value.f3 + "" + value.f4 + "" + value.f5;
         }
     }
