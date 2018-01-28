@@ -35,6 +35,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.AssignerWithPeriodicWatermarks;
 import org.apache.flink.streaming.api.functions.IngestionTimeExtractor;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
+import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 import org.apache.flink.streaming.api.functions.timestamps.AscendingTimestampExtractor;
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
 import org.apache.flink.streaming.api.functions.windowing.WindowFunction;
@@ -76,6 +77,7 @@ public class StationStreamProcessor {
     public static HashMap<Integer, Integer> station_pairs = new HashMap<Integer, Integer>();
 
 
+
     public static void main(String[] args) throws Exception {
 
         // hash map with all of the values
@@ -84,7 +86,7 @@ public class StationStreamProcessor {
 
         // set up the execution environment
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-//        env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
+        env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
         final ParameterTool parameterTool = ParameterTool.fromArgs(args);
 
@@ -92,7 +94,7 @@ public class StationStreamProcessor {
 
         // get data from kafka consumer
         Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "ec2-34-213-63-132.us-west-2.compute.amazonaws.com:9092");
+        properties.setProperty("bootstrap.servers", "ec2-52-42-99-91.us-west-2.compute.amazonaws.com:9092");
         properties.setProperty("group.id", "asdf");
 
         // create the consumer
@@ -109,6 +111,7 @@ public class StationStreamProcessor {
                 .map(new PrefixingMapper());
 
 
+        // try the ascending timestamps
         DataStream<Tuple6<Integer, Integer, Float, Long, String, String>> withTimestampsAndWatermarks = stream
                 .assignTimestampsAndWatermarks(new BoundedOutOfOrdernessGenerator());
 
@@ -117,7 +120,6 @@ public class StationStreamProcessor {
                 .keyBy(0)
                 .window(SlidingProcessingTimeWindows.of(Time.seconds(60), Time.seconds(5)))
                 .aggregate(new AverageAggregate());
-
 
 
 
@@ -134,11 +136,11 @@ public class StationStreamProcessor {
                     public boolean filter(Tuple6<Integer, Integer, Float, Long, String, String> value2) throws Exception {
                         return value2.f2 > 5000;
                     }
-                }).within(Time.seconds(10));
+                }).within(Time.seconds(20));
 
         // Create a pattern stream from our warning pattern
         PatternStream<Tuple6<Integer, Integer, Float, Long, String, String>> tempPatternStream = CEP.pattern(
-                stream.keyBy(0),
+                withTimestampsAndWatermarks.keyBy(0),
                 warningPattern);
 
         DataStream<Tuple6<Integer, Integer, Float, Long, String, String>> warnings = tempPatternStream.select(new PatternSelectFunction<Tuple6<Integer, Integer, Float, Long, String, String>, Tuple6<Integer, Integer, Float, Long, String, String>>() {
@@ -181,7 +183,7 @@ public class StationStreamProcessor {
                         }
 
                     }
-                }).within(Time.seconds(10));
+                }).within(Time.seconds(60));
 
         // Create a pattern stream from our warning pattern
         PatternStream<Tuple6<Integer, Integer, Float, Long, String, String>> alertPatternStream = CEP.pattern(
@@ -222,11 +224,11 @@ public class StationStreamProcessor {
                         }
 
                     }
-                }).within(Time.seconds(30));
+                }).within(Time.seconds(60));
 
         // Create a pattern stream from our warning pattern
         PatternStream<Tuple6<Integer, Integer, Float, Long, String, String>> brokenPatternStream = CEP.pattern(
-                stream.keyBy(0),
+                withTimestampsAndWatermarks.keyBy(0),
                 brokenPattern);
 
         DataStream<String> brokenSensors = brokenPatternStream.select(new PatternSelectFunction<Tuple6<Integer, Integer, Float, Long, String, String>, String>() {
@@ -241,18 +243,11 @@ public class StationStreamProcessor {
 
 
 
-
-
-
-//        withTimestampsAndWatermarks.print();
-//        alerts.print();
-//        brokenSensors.print();
-
-
 //        warnings.print();
-//        alerts.print();
+        alerts.print();
         brokenSensors.print();
 //        withTimestampsAndWatermarks.print();
+//        stream.print();
 
         DataStreamSink<String> alertPatternSink = alerts.addSink(
                 new FlinkKafkaProducer010<String>(
@@ -281,9 +276,6 @@ public class StationStreamProcessor {
         );
         alertPatternSink.name("average value sink");
 
-        average.print();
-
-
 
 
         env.execute("");
@@ -308,7 +300,9 @@ public class StationStreamProcessor {
 
             List<String> items = Arrays.asList(prefix.split("\t"));
 
-            return new Tuple6<Integer, Integer, Float, Long, String, String>(Integer.valueOf(items.get(0)), Integer.valueOf(items.get(1)), Float.valueOf(items.get(3)), Long.valueOf(items.get(2))*1000, items.get(4), items.get(5));
+            Float concentration = Float.valueOf(items.get(3))*2;
+
+            return new Tuple6<Integer, Integer, Float, Long, String, String>(Integer.valueOf(items.get(0)), Integer.valueOf(items.get(1)), concentration, Long.valueOf(items.get(2))*1000, items.get(4), items.get(5));
 
         }
     }
