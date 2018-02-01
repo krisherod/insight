@@ -1,0 +1,136 @@
+# ------------------------------------------------------------->>>>
+# DATA SET NAME
+#
+# dataset_name: ch4_mlo_surface-insitu_1_ccgg_HourlyData
+#
+# ------------------------------------------------------------->>>>
+# DESCRIPTION
+#
+# dataset_description: Atmospheric Methane Dry Air Mole Fractions from quasi-continuous measurements at Mauna Loa, Hawaii.
+#
+# ------------------------------------------------------------->>>>
+# CITATION
+#
+# dataset_citation: Dlugokencky, E.J., A.M. Crotwell, P.M. Lang, J.W. Mund (2017), Atmospheric Methane Dry Air Mole Fractions from quasi-continuous measurements at Mauna Loa, Hawaii, 1986-2016, Version: 2017-01-20, Path: ftp://aftp.cmdl.noaa.gov/data/trace_gases/ch4/in-situ/surface/
+#
+# ------------------------------------------------------------->>>>
+# FAIR USE POLICY
+#
+# dataset_fair_use: These data are made freely available to the public and the scientific community in the belief that their wide dissemination will lead to greater understanding and new scientific insights. The availability of these data does not constitute publication of the data.  NOAA relies on the ethics and integrity of the user to insure that ESRL receives fair credit for their work.  If the data are obtained for potential use in a publication or presentation, ESRL should be informed at the outset of the nature of this work. If the ESRL data are essential to the work, or if an important result or conclusion depends on the ESRL data, co-authorship may be appropriate.  This should be discussed at an early stage in the work.  Manuscripts using the ESRL data should be sent to ESRL for review before they are submitted for publication so we can insure that the quality and limitations of the data are accurately represented.
+#
+# ------------------------------------------------------------->>>>
+# WARNING
+#
+# dataset_warning: Every effort is made to produce the most accurate and precise measurements possible.  However, we reserve the right to make corrections to the data based on recalibration of standard gases or for other reasons deemed scientifically justified.  We are not responsible for results and conclusions based on use of these data without regard to this warning.
+#
+# ------------------------------------------------------------->>>>
+# GLOBAL ATTRIBUTES
+#
+# site_code : MLO
+# site_name : Mauna Loa, Hawaii
+# site_country : United States
+# site_country_flag : UNST0001.GIF
+# site_latitude : 19.5362
+# site_longitude : -155.5763
+# site_elevation : 3397.0
+# site_elevation_unit : masl
+# site_utc2lst : -10.0
+# site_utc2lst_comment : Add 'site_utc2lst' hours to convert a time stamp in UTC (Coordinated Universal Time) to LST (Local Standard Time).
+# site_url : http://www.esrl.noaa.gov/gmd/obop/mlo/
+# dataset_creation_date : 2017-01-20T10:07:58.693447
+# dataset_num : 4
+# dataset_name : ch4_mlo_surface-insitu_1_ccgg_HourlyData
+# dataset_parameter : ch4
+# dataset_project : surface-insitu
+# dataset_platform : fixed
+# dataset_map : map_mlo_surface-insitu_1.png
+# dataset_selection : All hourly data
+# dataset_selection_tag : HourlyData
+# dataset_calibration_scale : WMO CH4 X2004A
+# dataset_start_date : 1987-01-01T00:00:00Z
+# dataset_stop_date : 2016-12-31T23:00:00Z
+# dataset_data_frequency : 1
+# dataset_data_frequency_unit : hour
+# dataset_reciprocity : Use of these data implies an agreement to reciprocate. Laboratories making similar measurements agree to make their own data available to the general public and to the scientific community in an equally complete and easily accessible form. Modelers are encouraged to make available to the community, upon request, their own tools used in the interpretation of the ESRL data, namely well documented model code, transport fields, and additional information necessary for other scientists to repeat the work and to run modified versions. Model availability includes collaborative support for new users of the models.
+# dataset_reference_total_listed : 0
+# dataset_contribution : These data are provided by NOAA. Principal investigators include Ed Dlugokencky (NOAA).
+# lab_total_listed : 1
+# lab_1_number : 1
+# lab_1_abbr : NOAA
+# lab_1_name : NOAA Global Monitoring Division
+# lab_1_address1 : 325 Broadway
+# lab_1_address2 : NOAA GMD-1
+# lab_1_address3 : Boulder, CO 80305-3328
+# lab_1_country : United States
+# lab_1_url : http://www.esrl.noaa.gov/gmd/ccgg/
+# lab_1_country_flag : UNST0001.GIF
+# lab_1_logo : noaa_medium.png
+# lab_1_ongoing_atmospheric_air_comparison : T
+# lab_1_comparison_activity : Ongoing comparison with co-located measurements including NOAA surface flask data and independent measurement laboratories.
+# provider_total_listed : 1
+# provider_1_name : Ed Dlugokencky
+# provider_1_address1 : NOAA ESRL GMD
+# provider_1_address2 : 325 Broadway GMD-1
+# provider_1_address3 : Boulder, CO 80305-3328
+# provider_1_country : United States
+# provider_1_affiliation : National Oceanic and Atmospheric Administration
+# provider_1_email : ed.dlugokencky@noaa.gov
+# provider_1_tel : 303-497-6228
+# header_lines : 136
+#
+# ------------------------------------------------------------->>>>
+# VARIABLE ATTRIBUTES
+#
+# site_code:long_name : site_name_abbreviation.
+# site_code:comment : Site code is an abbreviation for the sampling site name.
+# time_components:_FillValue : -9
+# time_components:long_name : integer_components_of_UTC_date/time
+# time_components:order : year, month, day, hour, minute, second
+# time_components:comment : Calendar time components as integers.  Times and dates are UTC. Time-averaged values are reported at the beginning of the averaging interval.
+# value:_FillValue : -999.999
+# value:long_name : measured_mole_fraction_of_trace_gas_in_dry_air
+# value:units : nanomol mol-1
+# value:comment : Mole fraction reported in units of nanomol mol-1 (10-9 mol per mol of dry air); equivalent to ppb (parts per billion).
+# value_unc:_FillValue : -999.999
+# value_unc:long_name : estimated_uncertainty_in_reported_value
+# value_unc:units : nanomol mol-1
+# value_unc:comment : This is the standard deviation of the reported mean value when nvalue is greater than 1. See provider_comment if available.
+# nvalue:_FillValue : -9
+# nvalue:long_name : number_of_measurements_contributing_to_reported_value
+# nvalue:comment : Number of individual measurements used to compute reported value. See provider_comment if available.
+# latitude:_FillValue : -999.999
+# latitude:standard_name : latitude
+# latitude:long_name : sample_latitude_in_decimal_degrees
+# latitude:units : degrees_north
+# latitude:comment : Latitude at which air sample was collected.
+# longitude:_FillValue : -999.999
+# longitude:standard_name : longitude
+# longitude:long_name : sample_longitude_in_decimal_degrees
+# longitude:units : degrees_east
+# longitude:comment : Longitude at which air sample was collected.
+# altitude:_FillValue : -999.999
+# altitude:standard_name : altitude
+# altitude:long_name : sample_altitude_in_meters_above_sea_level
+# altitude:units : m
+# altitude:comment : Altitude (in meters above sea level). See provider_comment if available.
+# altitude:provider_comment : Altitude for this dataset is the sum of surface elevation (masl) and sample intake height (magl).
+# elevation:_FillValue : -999.999
+# elevation:standard_name : elevation
+# elevation:long_name : surface_elevation_in_meters_above_sea_level
+# elevation:units : m
+# elevation:comment : Surface elevation in meters above sea level. See provider_comment if available.
+# intake_height:_FillValue : -999.999
+# intake_height:long_name : sample_intake_height_in_meters_above_ground_level
+# intake_height:units : m
+# intake_height:comment : Sample intake height in meters above ground level (magl). See provider_comment if available.
+# qcflag:_FillValue : NA
+# qcflag:long_name : quality_control_flag
+# qcflag:comment : This quality control flag is provided by the contributing PIs. See provider_comment if available.
+# qcflag:provider_comment : This is the NOAA 3-character quality control flag.  Column 1 is the REJECTION flag. An alphanumeric other than a period (.) in the FIRST column indicates a sample with obvious problems during collection or analysis. This measurement should not be interpreted. Column 2 is the SELECTION flag. An alphanumeric other than a period (.) in the SECOND column indicates a sample that is likely valid but does not meet selection criteria determined by the goals of a particular investigation. Column 3 is the INFORMATION flag. An alphanumeric other than a period (.) in the THIRD column provides additional information about the collection or analysis of the sample.
+# instrument:_FillValue : NA
+# instrument:long_name : instrument_ID_to_detect_atmospheric_parameter
+# instrument:comment : Instrument ID used to detect atmospheric parameter. See provider_comment if available.
+#
+# VARIABLE ORDER
+#
+# 
