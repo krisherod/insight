@@ -28,20 +28,32 @@
       <file leaf-file-name="StationStreamProcessor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-154">
-              <caret line="240" column="21" lean-forward="false" selection-start-line="240" selection-start-column="21" selection-end-line="240" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HelperFunctions.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state relative-caret-position="180">
+              <caret line="168" column="39" lean-forward="false" selection-start-line="168" selection-start-column="39" selection-end-line="168" selection-end-column="39" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#4363#4397#0" expanded="true" />
+                <element signature="e#4472#4490#0" expanded="true" />
+                <element signature="e#5374#5382#0" expanded="true" />
+                <element signature="e#6313#6321#0" expanded="true" />
+                <element signature="e#9972#10027#0" expanded="true" />
+                <element signature="e#10065#10385#0" expanded="true" />
+                <element signature="e#10384#10385#0" expanded="true" />
+                <element signature="e#10442#10762#0" expanded="true" />
+                <element signature="e#10761#10762#0" expanded="true" />
+                <element signature="e#11260#11782#0" expanded="true" />
+                <element signature="e#11781#11782#0" expanded="true" />
+                <element signature="e#11987#12042#0" expanded="true" />
+                <element signature="e#12080#12552#0" expanded="true" />
+                <element signature="e#12551#12552#0" expanded="true" />
+                <element signature="e#12609#13486#0" expanded="true" />
+                <element signature="e#13485#13486#0" expanded="true" />
+                <element signature="e#13919#14402#0" expanded="true" />
+                <element signature="e#14401#14402#0" expanded="true" />
+                <element signature="e#14555#14610#0" expanded="true" />
+                <element signature="e#14675#16165#0" expanded="true" />
+                <element signature="e#16164#16165#0" expanded="true" />
+                <element signature="e#16578#17060#0" expanded="true" />
+                <element signature="e#17059#17060#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,6 +78,7 @@
       <find>sys</find>
       <find>pri</find>
       <find>mapper</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -92,9 +105,9 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
+  <component name="ProjectFrameBounds" extendedState="5">
     <option name="x" value="960" />
-    <option name="width" value="953" />
+    <option name="width" value="961" />
     <option name="height" value="1053" />
   </component>
   <component name="ProjectView">
@@ -112,8 +125,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -167,8 +182,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -318,21 +331,23 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="960" y="0" width="953" height="1053" extended-state="4" />
+    <frame x="960" y="0" width="961" height="1053" extended-state="5" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948583" sideWeight="0.4713243" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1930745" sideWeight="0.29092804" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46589717" sideWeight="0.16058394" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1930745" sideWeight="0.70907193" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46589717" sideWeight="0.8394161" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -343,7 +358,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="5.2083336E-4" sideWeight="0.49453977" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948583" sideWeight="0.47760418" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5054602" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -366,38 +380,99 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2910">
           <caret line="266" column="21" lean-forward="false" selection-start-line="266" selection-start-column="21" selection-end-line="266" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -406,187 +481,394 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="124" lean-forward="false" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="124" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="124" lean-forward="false" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="124" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="20" lean-forward="false" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="29" column="20" lean-forward="false" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="29" column="20" lean-forward="false" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -656,16 +938,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/HelperFunctions.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/flink/flink-core/1.4.0/flink-core-1.4.0.jar!/org/apache/flink/api/java/tuple/Tuple6.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -682,9 +955,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/myorg/quickstart/StationStreamProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-154">
-          <caret line="240" column="21" lean-forward="false" selection-start-line="240" selection-start-column="21" selection-end-line="240" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="180">
+          <caret line="168" column="39" lean-forward="false" selection-start-line="168" selection-start-column="39" selection-end-line="168" selection-end-column="39" />
+          <folding>
+            <element signature="e#4363#4397#0" expanded="true" />
+            <element signature="e#4472#4490#0" expanded="true" />
+            <element signature="e#5374#5382#0" expanded="true" />
+            <element signature="e#6313#6321#0" expanded="true" />
+            <element signature="e#9972#10027#0" expanded="true" />
+            <element signature="e#10065#10385#0" expanded="true" />
+            <element signature="e#10384#10385#0" expanded="true" />
+            <element signature="e#10442#10762#0" expanded="true" />
+            <element signature="e#10761#10762#0" expanded="true" />
+            <element signature="e#11260#11782#0" expanded="true" />
+            <element signature="e#11781#11782#0" expanded="true" />
+            <element signature="e#11987#12042#0" expanded="true" />
+            <element signature="e#12080#12552#0" expanded="true" />
+            <element signature="e#12551#12552#0" expanded="true" />
+            <element signature="e#12609#13486#0" expanded="true" />
+            <element signature="e#13485#13486#0" expanded="true" />
+            <element signature="e#13919#14402#0" expanded="true" />
+            <element signature="e#14401#14402#0" expanded="true" />
+            <element signature="e#14555#14610#0" expanded="true" />
+            <element signature="e#14675#16165#0" expanded="true" />
+            <element signature="e#16164#16165#0" expanded="true" />
+            <element signature="e#16578#17060#0" expanded="true" />
+            <element signature="e#17059#17060#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

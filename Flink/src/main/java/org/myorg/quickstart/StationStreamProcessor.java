@@ -128,10 +128,11 @@ public class StationStreamProcessor {
         // split incoming string into a tuple6<station_id, group_id, concentration, Lat/Lng, nearest sensors, then
         // assign timestamps and watermarks, and finally key the streams by the station_id
         DataStream<Tuple6<Integer, Integer, Float, Long, String, String>> methane_stream = env
-                .addSource(methane_consumer_raw)
+                .addSource(methane_consumer_raw).shuffle()
                 .map(new PrefixingMapper())
                 .assignTimestampsAndWatermarks(new BoundedOutOfOrdernessGenerator())
                 .keyBy(0);
+
 
 
 
@@ -147,10 +148,10 @@ public class StationStreamProcessor {
 
         // split incoming string into a tuple6<station_id, group_id, concentration, Lat/Lng, nearest sensors, then
         // assign timestamps and watermarks, and finally key the streams by the station_id
-        DataStream<Tuple6<Integer, Integer, Float, Long, String, String>> temperature_stream = env
+        DataStream<Tuple5<Integer, Integer, Float, Long, String>> temperature_stream = env
                 .addSource(temperature_consumer_raw)
-                .map(new PrefixingMapper())
-                .assignTimestampsAndWatermarks(new BoundedOutOfOrdernessGenerator())
+                .map(new PrefixingMapperTemperature())
+                .assignTimestampsAndWatermarks(new TemperatureBoundedOutOfOrdernessGenerator())
                 .keyBy(0);
 
 
@@ -158,8 +159,8 @@ public class StationStreamProcessor {
         // combine the methane and temperature streams in order to correct the methane values with the temperature
         // values
 
-        DataStream<Tuple6<Integer, Integer, Float, Long, String, String>> corrected_methane_stream = methane_stream.connect(temperature_stream)
-                .flatMap(new RichCoFlatMapFunction<Tuple6<Integer, Integer, Float, Long, String, String>, Tuple6<Integer, Integer, Float, Long, String, String>, Tuple6<Integer, Integer, Float, Long, String, String>>() {
+        DataStream<Tuple6<Integer, Integer, Float, Long, String, String>> corrected_methane_stream = temperature_stream.connect(methane_stream)
+                .flatMap(new RichCoFlatMapFunction<Tuple5<Integer, Integer, Float, Long, String>, Tuple6<Integer, Integer, Float, Long, String, String>, Tuple6<Integer, Integer, Float, Long, String, String>>() {
 
                     // save the last temperature value from the temperature stream in order to correct the methane value
                     private ValueState<Float> seen = null;
@@ -175,7 +176,7 @@ public class StationStreamProcessor {
                     }
 
                     @Override
-                    public void flatMap1(Tuple6<Integer, Integer, Float, Long, String, String> value1, Collector<Tuple6<Integer, Integer, Float, Long, String, String>> collector) throws Exception {
+                    public void flatMap1(Tuple5<Integer, Integer, Float, Long, String> value1, Collector<Tuple6<Integer, Integer, Float, Long, String, String>> collector) throws Exception {
                         seen.update(value1.f2);
                     }
 
@@ -218,7 +219,7 @@ public class StationStreamProcessor {
                     public boolean filter(Tuple6<Integer, Integer, Float, Long, String, String> value2) throws Exception {
                         return value2.f2 > 5000;
                     }
-                }).within(Time.seconds(20));
+                }).within(Time.seconds(60));
 
         // Pattern stream from our warning pattern
         PatternStream<Tuple6<Integer, Integer, Float, Long, String, String>> methane_warning_pattern_stream = CEP.pattern(
@@ -254,15 +255,22 @@ public class StationStreamProcessor {
                     @Override
                     public boolean filter(Tuple6<Integer, Integer, Float, Long, String, String> value2) throws Exception {
                         // get the station_id of the last value
-                        int last_station_id = station_pairs.get(value2.f1);
 
-                        if (value2.f0 != last_station_id) {
-                            return value2.f2 > 5000;
-                        } else {
+                        try {
+                            int last_station_id = station_pairs.get(value2.f1);
+                            if (value2.f0 != last_station_id) {
+                                return value2.f2 > 5000;
+                            } else {
+                                return false;
+                            }
 
-//                            logger.log(Level.WARNING, "Sensor %d has been high two consecutive times", value2.f0);
+                        } catch (Exception e) {
+                            System.out.println("No data in station_pairs");
                             return false;
                         }
+
+
+
 
                     }
                 }).within(Time.seconds(60));
@@ -298,7 +306,18 @@ public class StationStreamProcessor {
 
                             // compare the current value to the average value of the nearby sensor
                             if (stations.get(value1.f1).containsKey(value1.f0)) {
-                                return value1.f2 > stations.get(value1.f1).get(value1.f0)*10 || value1.f2 < 0;
+//                                System.out.println(stations.get(value1.f1).get(value1.f0));
+                                if (stations.get(value1.f1).get(value1.f0) != null) {
+                                    try {
+                                        return value1.f2 > stations.get(value1.f1).get(value1.f0) * 10 || value1.f2 < 0;
+                                    } catch (Exception e){
+                                        System.out.println(e);
+                                        return false;
+                                    }
+                                } else {
+                                    return false;
+                                }
+
                             } else {
                                 return false;
                             }
@@ -329,6 +348,7 @@ public class StationStreamProcessor {
 
         methane_alerts.print();
         faulty_sensors.print();
+        corrected_methane_stream.print();
 
 
         // Sink the methane alerts to Kafka
@@ -385,6 +405,20 @@ public class StationStreamProcessor {
             Float concentration = Float.valueOf(items.get(3));
 
             return new Tuple6<Integer, Integer, Float, Long, String, String>(Integer.valueOf(items.get(0)), Integer.valueOf(items.get(1)), concentration, Long.valueOf(items.get(2))*1000, items.get(4), items.get(5));
+
+        }
+    }
+
+
+    private static class PrefixingMapperTemperature implements MapFunction<String, Tuple5<Integer, Integer, Float, Long, String>> {
+        //        private final String prefix;
+        @Override
+        public Tuple5<Integer, Integer, Float, Long, String> map(String prefix) {
+
+            List<String> items = Arrays.asList(prefix.split("\t"));
+            Float concentration = Float.valueOf(items.get(3));
+
+            return new Tuple5<Integer, Integer, Float, Long, String>(Integer.valueOf(items.get(0)), Integer.valueOf(items.get(1)), concentration, Long.valueOf(items.get(2))*1000, items.get(4));
 
         }
     }
@@ -451,6 +485,28 @@ public class StationStreamProcessor {
 
         @Override
         public long extractTimestamp(Tuple6<Integer, Integer, Float, Long, String, String> element, long previousElementTimestamp) {
+            long timestamp = element.f3;
+            currentMaxTimestamp = Math.max(timestamp, currentMaxTimestamp);
+            return timestamp;
+        }
+
+        @Override
+        public Watermark getCurrentWatermark() {
+            // return the watermark as current highest timestamp minus the out-of-orderness bound
+            return new Watermark(currentMaxTimestamp - maxOutOfOrderness);
+        }
+    }
+
+
+
+    public static class TemperatureBoundedOutOfOrdernessGenerator implements AssignerWithPeriodicWatermarks<Tuple5<Integer, Integer, Float, Long, String>> {
+
+        private final long maxOutOfOrderness = 20000; // 10 seconds
+
+        private long currentMaxTimestamp;
+
+        @Override
+        public long extractTimestamp(Tuple5<Integer, Integer, Float, Long, String> element, long previousElementTimestamp) {
             long timestamp = element.f3;
             currentMaxTimestamp = Math.max(timestamp, currentMaxTimestamp);
             return timestamp;
