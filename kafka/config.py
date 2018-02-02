@@ -1,7 +1,0 @@
-db_host = 'test2.cw2k4n8fpsxx.us-west-2.rds.amazonaws.com'
-db_port = '5432'
-db_name = 'station'
-db_user_name = 'test'
-db_password = 'testcluster'
-kafka_host = 'ec2-34-213-63-132.us-west-2.compute.amazonaws.com'
-kafka_topic = 'my-topic3'
