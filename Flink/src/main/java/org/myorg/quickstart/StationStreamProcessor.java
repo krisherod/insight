@@ -65,6 +65,9 @@ import org.apache.kafka.common.metrics.stats.Count;
 
 import javax.print.attribute.standard.Severity;
 import javax.xml.crypto.Data;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -99,6 +102,22 @@ public class StationStreamProcessor {
 
 
 
+    public static Properties getConfig(String filename) {
+        Properties cfg = new Properties();
+
+        try {
+            InputStream input = new FileInputStream(filename);
+            cfg.load(input);
+        } catch (IOException e) {
+            System.out.println("Could not load config file.");
+            System.out.println(e.getMessage());
+        }
+
+        return cfg;
+    }
+
+
+
     public static void main(String[] args) throws Exception {
 
         // Create a logger
@@ -112,6 +131,10 @@ public class StationStreamProcessor {
         final float methane_leak_threshold = 5000;
 
 
+        Properties cfg = getConfig("config.properties");
+        final String kafkaServer = cfg.getProperty("bootstrap.server");
+
+
         // set up the execution environment
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
@@ -121,7 +144,7 @@ public class StationStreamProcessor {
 
         // Properties for the Kafka Consumer
         Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "ec2-52-11-90-50.us-west-2.compute.amazonaws.com:9092");
+        properties.setProperty("bootstrap.servers", kafkaServer);
 
 
         // create the consumer for the methane data
