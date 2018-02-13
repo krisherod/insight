@@ -37,7 +37,7 @@ Pipeline
 - Flask: for visualization of alerts, and faulty sensors
 
 
-![alt text](Methane Leak Detection Network.jpg)
+![alt text](https://raw.githubusercontent.com/username/projectname/Methane Leak Detection Network.jpg)
 
 
 
