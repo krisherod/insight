@@ -1,6 +1,4 @@
-# insight
-
-6thScent: Detecting methane alerts in real time
+# 6thScent: Detecting methane alerts in real time
 
 
 Project motivation:
@@ -37,7 +35,7 @@ Pipeline
 - Flask: for visualization of alerts, and faulty sensors
 
 
-![alt text](https://raw.githubusercontent.com/username/projectname/Methane Leak Detection Network.jpg)
+![alt text](https://github.com/krisherod/insight/blob/master/Methane%20Leak%20Detection%20Network.jpg)
 
 
 
