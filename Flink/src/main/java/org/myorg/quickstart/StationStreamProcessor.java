@@ -109,7 +109,7 @@ public class StationStreamProcessor {
 
         // set up variables
         final int pattern_window_size = 20;
-        final float methane_leak_threshold = 2000;
+        final float methane_leak_threshold = 5000;
 
 
         // set up the execution environment
@@ -298,7 +298,7 @@ public class StationStreamProcessor {
 //                                System.out.println(stations.get(value1.f1).get(value1.f0));
                                 if (stations.get(value1.f1).get(value1.f0) != null) {
                                     try {
-                                        return value1.f2 > stations.get(value1.f1).get(value1.f0) * 10 || value1.f2 < 0;
+                                       return value1.f2 > stations.get(value1.f1).get(value1.f0) * 5 || value1.f2 < 0;
                                     } catch (Exception e){
                                         System.out.println(e);
                                         return false;
@@ -315,7 +315,7 @@ public class StationStreamProcessor {
                         }
 
                     }
-                }).within(Time.seconds(pattern_window_size));
+                }).within(Time.seconds(60));
 
         // Pattern stream for detecting faulty sensors
         PatternStream<Tuple6<Integer, Integer, Float, Long, String, String>> faulty_sensor_pattern_stream = CEP.pattern(
@@ -337,7 +337,7 @@ public class StationStreamProcessor {
 
         methane_alerts.print();
         faulty_sensors.print();
-        corrected_methane_stream.print();
+//        corrected_methane_stream.print();
 
 
         // Sink the methane alerts to Kafka
