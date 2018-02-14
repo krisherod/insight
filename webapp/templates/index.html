@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
-            {{sndmap.js}}
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Complex icons</title>
+        <style>
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+            #map {
+                height: 100%;
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
     </head>
-    <body>
-
-        <h2> Second map generated in view</h2>
-        <h3> Example for different icons in multiple markers with infoboxes</h3>
-        {{sndmap.html}}
-
-    </body>
+<body>
+    <div id="map"></div>
+    <script type="text/javascript" src="{{ url_for('static', filename='map.js') }}"
+>    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPUO3xvbF7xTJkqsM1b4fq5am1FqXM-Po&callback=initMap">
+    </script>
+  </body>
 </html>
+

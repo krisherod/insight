@@ -1,87 +1,67 @@
-# coding: utf-8
-
-from flask import Flask, render_template
-from flask_googlemaps import GoogleMaps
-from flask_googlemaps import Map, icons
-import webbrowser
+from flask import Flask, flash, redirect, render_template
 import psycopg2
-from datetime import datetime
+import config
+from datetime import datetime, timedelta
 import json
 
-app = Flask(__name__, template_folder="templates")
 
-# GoogleMaps(app, key="AIzaSyDh7SGU7_tQYMe-Sbik39Rwosclm6TAZ4A")
+app = Flask(__name__)
+
 
 
 
 # put this into another file
 def getData():
 
-        try:
-            conn_string = "host='%s' port='%s' dbname='%s' user='%s' password='%s'"%(config.db_host, config.db_port, config.db_name, config.db_user_name, config.db_password)
-            conn = psycopg2.connect(conn_string)
+	conn_string = "host='%s' port='%s' dbname='%s' user='%s' password='%s'"%(config.db_host, config.db_port, config.db_name, config.db_user_name, config.db_password)
+	conn = psycopg2.connect(conn_string)
 
-            cursor = conn.cursor()
+	cursor = conn.cursor()
 
-            if cursor:
-                    print ("connected to postgresql")
+	if cursor:
+		print ("connected to postgresql")
 
-            sql_statement = "SELECT * FROM station_status WHERE current_timestamp>'"+str(datetime.now()-timedelta(seconds = 10))+"';"
+	#sql_statement = "SELECT * FROM station_status WHERE timestamp>'"+str(datetime.now()-timedelta(seconds = 10))+"';"
 
-            cursor.execute(sql_statement)
+    sql_statement = "SELECT station_id, group_id, concentration, latitude, longitude, warning_status, alert_stat$
 
-            station_data = []
+	cursor.execute(sql_statement)
 
-
-            for station in cursor.fetchall():
-                    station_data.append ({
-                            'group_id': station[1],
-                            'timestamp': str(station[2]),
-                            'concentration': station[7],
-                            'latitude': station[3],
-                            'longitude': station[4],
-                            'warning_status': station[5],
-                            'alert_status': station[6],
-                            'device_status': station[8]
-                    })
+    station_data = []
 
 
+    for station in cursor.fetchall():
+        station_data.append ({
+                        'group_id': station[1],
+                        'concentration': station[2],
+                        'latitude': station[3],
+                        'longitude': station[4],
+                        'warning_status': station[5],
+                        'alert_status': station[6],
+                        'device_status': station[7]
+                })
 
-
-            return station_data
-
-        except:
-            return [{'group_id': 100, 'timestamp': str(datetime.now()), 'concentration': 123, 'latitude': 43.0, 'longitude': -122.7, 'alert_status': 1, 'device_status': 0}]
+    return station_data
 
 
 
 
-
-@app.route('/getData')
+@app.route("/update")
 def update():
-    return json.dumps(getData())
+	return json.dumps(getData())
 
 
+# put routes into another file
+@app.route("/")
+def index():
+	station_data = getData()
 
-
-@app.route('/')
-def mymap():
-
-    locations = [{'lat': 37.3,'lng': -122.3,'icon': 'http://maps.google.com/mapfiles/kml/pal3/icon59.png','infobox': '<b>asdfasdf</b>'}]
-    sndmap = Map(
-        identifier="sndmap",
-        style="height:900px;width:900px",
-        lat=locations[0]['lat'],
-        lng=locations[0]['lng'],
-        markers=[{'icon': loc['icon'], 'lat':loc['lat'], 'lng': loc['lng']} for loc in locations]
-    )
-    
-    return render_template('map.html')
-
+	return render_template(
+		'index.html', station_data = station_data)
 
 
 
 if __name__=="__main__":
-	app.run()
+	app.run(host="0.0.0.0", port=5000)
 
 
