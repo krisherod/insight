@@ -1,6 +1,7 @@
 package org.myorg.quickstart;
 
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.java.tuple.Tuple5;
 import org.apache.flink.api.java.tuple.Tuple6;
 
 import java.util.Arrays;
@@ -8,40 +9,56 @@ import java.util.List;
 
 public class HelperFunctions {
 
-    //
-    // 	User Functions
-    //
+    /**
+     * Takes a string from methane data kafka consumer and turns it into a tuple
+     * * @param Tuple6<Integer, Integer, Float, Long, String, String> The incoming methane sensor data
+     * @return Tuple6<Integer, Integer, Float, Long, String, String> This returns a split version of the string
+     */
+    public static class ParseSensorData implements
+            MapFunction<String, Tuple6<Integer, Integer, Float, Long, String, String>> {
+
+        @Override
+        public Tuple6<Integer, Integer, Float, Long, String, String> map(String sensorData) {
+
+            List<String> items = Arrays.asList(sensorData.split("\t"));
+            Float concentration = Float.valueOf(items.get(3));
+
+            try {
+                return new Tuple6<Integer, Integer, Float, Long, String, String>
+                        (Integer.valueOf(items.get(0)), Integer.valueOf(items.get(1)),
+                                concentration, Long.valueOf(items.get(2))*1000, items.get(4), items.get(5));
+            } catch (Exception e) {
+                return null;
+            }
+
+
+
+        }
+    }
+
 
     /**
-     * Implements the string tokenizer that splits sentences into words as a user-defined
-     * FlatMapFunction. The function takes a line (String) and splits it into
-     * multiple pairs in the form of "(word,1)" (Tuple2<String, Integer>).
+     * Takes a string from methane data kafka consumer and turns it into a tuple
+     * @param Tuple5<Integer, Integer, Float, Long, String> The incoming temperature sensor data
+     * @return Tuple6<Integer, Integer, Float, Long, String, String> This returns a split version of the string
      */
+    public static class ParseTemperatureData implements
+            MapFunction<String, Tuple5<Integer, Integer, Float, Long, String>> {
 
-    // this class will split my string into an array
-    public static class PrefixingMapper implements MapFunction<String, Tuple6<String, String, Float, String, String, String>> {
-        //        private final String prefix;
         @Override
-        public Tuple6<String, String, Float, String, String, String> map(String prefix) {
+        public Tuple5<Integer, Integer, Float, Long, String> map(String sensorData) {
 
-            List<String> items = Arrays.asList(prefix.split("\t"));
-//            Tuple2<String, Float> tup = new Tuple2<String, Float>(items.get(0), new Float(items.get(2)));
-            return new Tuple6<String, String, Float, String, String, String>(items.get(0), items.get(1), Float.valueOf(items.get(3)), items.get(2), items.get(4), items.get(5));
-//            return new Tuple2<Integer, Integer>(1, 1);
+            List<String> items = Arrays.asList(sensorData.split("\t"));
+            Float concentration = Float.valueOf(items.get(3));
+
+            return new Tuple5<Integer, Integer, Float, Long, String>(Integer.valueOf(items.get(0)),
+                    Integer.valueOf(items.get(1)), concentration, Long.valueOf(items.get(2))*1000, items.get(4));
 
         }
     }
-
-
-
-    public static class TupleToString implements MapFunction<Tuple6<Integer, Integer, Float, String, String, String>, String> {
-        @Override
-        public String map(Tuple6<Integer, Integer, Float, String, String, String> value) throws Exception {
-            return value.f0 + "" + value.f1 + "" + String.valueOf(value.f2) + "" + value.f3 + "" + value.f4 + "" + value.f5;
-        }
-    }
-
 
 
 }
+
+
 

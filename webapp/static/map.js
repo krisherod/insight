@@ -13,6 +13,7 @@ updateMap();
 
 }
 
+
 function updateMap() {
 
     function loadJSON(callback) {
@@ -51,6 +52,7 @@ function updateMap() {
 
         var infowindow = new google.maps.InfoWindow({
             content: contentString
+            
         });
 
 

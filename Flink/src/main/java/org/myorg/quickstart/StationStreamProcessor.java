@@ -1,85 +1,40 @@
 package org.myorg.quickstart;
 
 
-//import jdk.nashorn.internal.parser.JSONParser;
 
-
-import com.datastax.driver.core.Cluster;
-//import javafx.event.Event;
 import org.apache.flink.api.common.functions.*;
-import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
 import org.apache.flink.api.common.typeinfo.TypeHint;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
-import org.apache.flink.api.java.DataSet;
-import org.apache.flink.api.java.ExecutionEnvironment;
-import org.apache.flink.api.java.aggregation.Aggregations;
-import org.apache.flink.api.java.io.jdbc.JDBCOutputFormat;
 import org.apache.flink.api.java.tuple.*;
-import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.cep.CEP;
-import org.apache.flink.cep.PatternFlatSelectFunction;
 import org.apache.flink.cep.PatternSelectFunction;
 import org.apache.flink.cep.PatternStream;
 import org.apache.flink.cep.pattern.Pattern;
-
 import org.apache.flink.cep.pattern.conditions.IterativeCondition;
 import org.apache.flink.cep.pattern.conditions.SimpleCondition;
 import org.apache.flink.configuration.Configuration;
-import org.apache.flink.runtime.executiongraph.restart.RestartStrategy;
-import org.apache.flink.runtime.state.StatePartitionStreamProvider;
-import org.apache.flink.shaded.curator.org.apache.curator.framework.recipes.leader.LeaderLatch;
-import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSink;
-import org.apache.flink.streaming.api.environment.StreamContextEnvironment;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.AssignerWithPeriodicWatermarks;
-import org.apache.flink.streaming.api.functions.IngestionTimeExtractor;
 import org.apache.flink.streaming.api.functions.co.RichCoFlatMapFunction;
-import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
-import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
-import org.apache.flink.streaming.api.functions.timestamps.AscendingTimestampExtractor;
-import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
-import org.apache.flink.streaming.api.functions.windowing.WindowFunction;
 import org.apache.flink.streaming.api.watermark.Watermark;
-import org.apache.flink.streaming.api.windowing.assigners.SlidingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.assigners.SlidingProcessingTimeWindows;
-import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
-import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
-import org.apache.flink.streaming.connectors.cassandra.CassandraSink;
-import org.apache.flink.streaming.connectors.cassandra.CassandraTupleSink;
-import org.apache.flink.streaming.connectors.cassandra.ClusterBuilder;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer010;
-import org.apache.flink.types.Row;
 import org.apache.flink.util.Collector;
-import org.apache.kafka.common.metrics.stats.Count;
-//import org.graalvm.compiler.lir.LIRInstruction;
-//import scala.util.parsing.json.JSONObject;
-
-
-import javax.print.attribute.standard.Severity;
-import javax.xml.crypto.Data;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.json.JSONArray;
 import org.myorg.quickstart.HelperFunctions;
-
-
 
 
 public class StationStreamProcessor {
@@ -87,7 +42,8 @@ public class StationStreamProcessor {
 
     /**
      * Partitions a datastream evenly across the number of partitions
-     * @param
+     * @params Integer key of the sensor
+     * @return Integer new partition key
      */
     public static class MyPartitioner implements Partitioner<Integer> {
         @Override
@@ -97,7 +53,8 @@ public class StationStreamProcessor {
     }
 
     // hash maps for storing averaged values
-    public static HashMap<Integer, HashMap<Integer, Float>> stations = new HashMap<Integer, HashMap<Integer, Float>>();
+    public static HashMap<Integer, HashMap<Integer, Float>> stations = new HashMap<Integer,
+            HashMap<Integer, Float>>();
     public static HashMap<Integer, Integer> station_pairs = new HashMap<Integer, Integer>();
 
 
@@ -128,7 +85,11 @@ public class StationStreamProcessor {
 
         // set up variables
         final int pattern_window_size = 20;
+        final int faulty_sensor_pattern_window_size = 60;
+
+        final int fault_sensor_threshold = 10;
         final float methane_leak_threshold = 5000;
+
 
 
         Properties cfg = getConfig("config.properties");
@@ -157,12 +118,13 @@ public class StationStreamProcessor {
         // Start reading methane data in kafka from last value
         methane_consumer_raw.setStartFromLatest();
 
-        // split incoming string into a tuple6<station_id, group_id, concentration, Lat/Lng, nearest sensors, then
+        // split incoming string into a tuple6<station_id, group_id, concentration, Lat/Lng,
+        // nearest sensors, then
         // assign timestamps and watermarks, and finally key the streams by the station_id
         DataStream<Tuple6<Integer, Integer, Float, Long, String, String>> methane_stream = env
                 .addSource(methane_consumer_raw)
                 .shuffle()
-                .map(new PrefixingMapper())
+                .map(new HelperFunctions.ParseSensorData())
                 .assignTimestampsAndWatermarks(new BoundedOutOfOrdernessGenerator())
                 .keyBy(0);
 
@@ -179,19 +141,19 @@ public class StationStreamProcessor {
         // Start reading temperature data in kafka from last value
         temperature_consumer_raw.setStartFromLatest();
 
-        // split incoming string into a tuple6<station_id, group_id, concentration, Lat/Lng, nearest sensors, then
-        // assign timestamps and watermarks, and finally key the streams by the station_id
+        // split incoming string into a tuple6<station_id, group_id, concentration, Lat/Lng, nearest
+        // sensors, then assign timestamps and watermarks, and finally key the streams by the station_id
         DataStream<Tuple5<Integer, Integer, Float, Long, String>> temperature_stream = env
                 .addSource(temperature_consumer_raw)
                 .shuffle()
-                .map(new PrefixingMapperTemperature())
+                .map(new HelperFunctions.ParseTemperatureData())
                 .assignTimestampsAndWatermarks(new TemperatureBoundedOutOfOrdernessGenerator())
                 .keyBy(0);
 
 
 
-        // combine the methane and temperature streams in order to correct the methane values with the temperature
-        // values
+        // combine the methane and temperature streams in order to correct the methane values with
+        // the temperature values
 
         DataStream<Tuple6<Integer, Integer, Float, Long, String, String>> corrected_methane_stream =
                 temperature_stream.connect(methane_stream)
@@ -216,7 +178,8 @@ public class StationStreamProcessor {
                 Pattern.<Tuple6<Integer, Integer, Float, Long, String, String>>begin("first")
                 .where(new SimpleCondition<Tuple6<Integer, Integer, Float, Long, String, String>>() {
                     @Override
-                    public boolean filter(Tuple6<Integer, Integer, Float, Long, String, String> value1) throws Exception {
+                    public boolean filter(Tuple6<Integer, Integer, Float, Long, String, String> value1)
+                            throws Exception {
                         return value1.f2 > methane_leak_threshold;
                     }
                 })
@@ -237,10 +200,15 @@ public class StationStreamProcessor {
 
         // Create a stream of methane warnings that match the patterns
         DataStream<Tuple6<Integer, Integer, Float, Long, String, String>> methane_warning =
-                methane_warning_pattern_stream.select(new PatternSelectFunction<Tuple6<Integer, Integer, Float, Long, String, String>, Tuple6<Integer, Integer, Float, Long, String, String>>() {
+                methane_warning_pattern_stream.select(new PatternSelectFunction<
+                        Tuple6<Integer, Integer, Float, Long, String, String>,
+                        Tuple6<Integer, Integer, Float, Long, String, String>>() {
             @Override
-            public Tuple6<Integer, Integer, Float, Long, String, String> select(Map<String, List<Tuple6<Integer, Integer, Float, Long, String, String>>> warningPattern) throws Exception {
-                Tuple6<Integer, Integer, Float, Long, String, String> warning = warningPattern.get("second").get(0);
+            public Tuple6<Integer, Integer, Float, Long, String, String> select(
+                    Map<String, List<Tuple6<Integer, Integer, Float, Long, String, String>>>
+                            warningPattern) throws Exception {
+                Tuple6<Integer, Integer, Float, Long, String, String> warning =
+                        warningPattern.get("second").get(0);
                 return warning;
             }
         });
@@ -254,7 +222,8 @@ public class StationStreamProcessor {
                 Pattern.<Tuple6<Integer, Integer, Float, Long, String, String>>begin("first")
                 .where(new SimpleCondition<Tuple6<Integer, Integer, Float, Long, String, String>>() {
                     @Override
-                    public boolean filter(Tuple6<Integer, Integer, Float, Long, String, String> value1) throws Exception {
+                    public boolean filter(Tuple6<Integer, Integer, Float, Long, String, String> value1)
+                            throws Exception {
                         // add the first station value into the station_pairs hashmap
                         station_pairs.put(value1.f1, value1.f0);
                         return value1.f2 > methane_leak_threshold;
@@ -264,7 +233,8 @@ public class StationStreamProcessor {
                 .next("second")
                 .where(new SimpleCondition<Tuple6<Integer, Integer, Float, Long, String, String>>() {
                     @Override
-                    public boolean filter(Tuple6<Integer, Integer, Float, Long, String, String> value2) throws Exception {
+                    public boolean filter(Tuple6<Integer, Integer, Float, Long, String, String> value2)
+                            throws Exception {
                         // get the station_id of the last value
 
                         try {
@@ -280,9 +250,6 @@ public class StationStreamProcessor {
                             return false;
                         }
 
-
-
-
                     }
                 }).within(Time.seconds(pattern_window_size));
 
@@ -292,9 +259,11 @@ public class StationStreamProcessor {
                 methane_alert_pattern);
 
         // Create a stream of methane alerts that match the pattern
-        DataStream<String> methane_alerts = alertPatternStream.select(new PatternSelectFunction<Tuple6<Integer, Integer, Float, Long, String, String>, String>() {
+        DataStream<String> methane_alerts = alertPatternStream.select(
+                new PatternSelectFunction<Tuple6<Integer, Integer, Float, Long, String, String>, String>() {
             @Override
-            public String select(Map<String, List<Tuple6<Integer, Integer, Float, Long, String, String>>> warningPattern) throws Exception {
+            public String select(Map<String, List<Tuple6<Integer, Integer, Float, Long, String, String>>>
+                                         warningPattern) throws Exception {
                 Tuple6<Integer, Integer, Float, Long, String, String> g = warningPattern.get("second").get(0);
                 return String.format("%d,%d,%f,%s,%s,0,1,0", g.f0, g.f1, g.f2, g.f3, g.f4);
 
@@ -308,25 +277,25 @@ public class StationStreamProcessor {
 
         // Pattern for faulty sensors
         Pattern<Tuple6<Integer, Integer, Float, Long, String, String>, ?>
-                faulty_sensor_pattern = Pattern.<Tuple6<Integer, Integer, Float, Long, String, String>>begin("first")
-                .times(10)
+                faulty_sensor_pattern = Pattern.<Tuple6<Integer, Integer, Float, Long, String, String>>
+                begin("first")
+                .times(fault_sensor_threshold)
                 .where(new IterativeCondition<Tuple6<Integer, Integer, Float, Long, String, String>>() {
                     @Override
 
-                    public boolean filter(Tuple6<Integer, Integer, Float, Long, String, String> value1, Context<Tuple6<Integer, Integer, Float, Long, String, String>> context) throws Exception {
+                    public boolean filter(Tuple6<Integer, Integer, Float, Long, String, String> value1,
+                                          Context<Tuple6<Integer, Integer, Float, Long, String, String>> context)
+                            throws Exception {
                         if (stations.containsKey(value1.f1)) {
-
                             // compare the current value to the average value of the nearby sensor
-                            if (stations.get(value1.f1).containsKey(value1.f0)) {
+                            if (stations.get(value1.f1).containsKey(value1.f0) &&
+                                    stations.get(value1.f1).get(value1.f0) != null) {
 //                                System.out.println(stations.get(value1.f1).get(value1.f0));
-                                if (stations.get(value1.f1).get(value1.f0) != null) {
-                                    try {
-                                       return value1.f2 > stations.get(value1.f1).get(value1.f0) * 5 || value1.f2 < 0;
-                                    } catch (Exception e){
-                                        System.out.println(e);
-                                        return false;
-                                    }
-                                } else {
+                                try {
+                                   return value1.f2 > stations.get(value1.f1).get(value1.f0) * 5 ||
+                                           value1.f2 < 0;
+                                } catch (Exception e){
+                                    System.out.println(e);
                                     return false;
                                 }
 
@@ -338,29 +307,26 @@ public class StationStreamProcessor {
                         }
 
                     }
-                }).within(Time.seconds(60));
+                }).within(Time.seconds(faulty_sensor_pattern_window_size));
 
         // Pattern stream for detecting faulty sensors
-        PatternStream<Tuple6<Integer, Integer, Float, Long, String, String>> faulty_sensor_pattern_stream = CEP.pattern(
+        PatternStream<Tuple6<Integer, Integer, Float, Long, String, String>>
+                faulty_sensor_pattern_stream = CEP.pattern(
                 corrected_methane_stream.keyBy(0),
                 faulty_sensor_pattern);
 
         // Stream of faulty sensors
-        DataStream<String> faulty_sensors = faulty_sensor_pattern_stream.select(new PatternSelectFunction<Tuple6<Integer, Integer, Float, Long, String, String>, String>() {
+        DataStream<String> faulty_sensors = faulty_sensor_pattern_stream.select(
+                new PatternSelectFunction<Tuple6<Integer, Integer, Float, Long, String, String>, String>() {
             @Override
-            public String select(Map<String, List<Tuple6<Integer, Integer, Float, Long, String, String>>> warningPattern) throws Exception {
+            public String select(Map<String, List<Tuple6<Integer, Integer, Float, Long, String, String>>>
+                                         warningPattern) throws Exception {
                 Tuple6<Integer, Integer, Float, Long, String, String> g = warningPattern.get("first").get(0);
                 return String.format("%d,%d,%f,%s,%s,0,0,1", g.f0, g.f1, g.f2, g.f3, g.f4);
 
             }
         });
 
-
-
-
-        methane_alerts.print();
-        faulty_sensors.print();
-//        corrected_methane_stream.print();
 
 
         // Sink the methane alerts to Kafka
@@ -401,56 +367,11 @@ public class StationStreamProcessor {
     // 	User Functions
     //
 
-    /**
-     * Takes a string from methane data kafka consumer and turns it into a tuple
-     * @return Tuple6<Integer, Integer, Float, Long, String, String> This returns a split version of the string
-     */
-    private static class PrefixingMapper implements
-            MapFunction<String, Tuple6<Integer, Integer, Float, Long, String, String>> {
-        //        private final String prefix;
-        @Override
-        public Tuple6<Integer, Integer, Float, Long, String, String> map(String prefix) {
-
-            List<String> items = Arrays.asList(prefix.split("\t"));
-            Float concentration = Float.valueOf(items.get(3));
-
-            try {
-                return new Tuple6<Integer, Integer, Float, Long, String, String>
-                        (Integer.valueOf(items.get(0)), Integer.valueOf(items.get(1)),
-                                concentration, Long.valueOf(items.get(2))*1000, items.get(4), items.get(5));
-            } catch (Exception e) {
-                return null;
-            }
-
-
-
-        }
-    }
-
-
-    /**
-     * Takes a string from methane data kafka consumer and turns it into a tuple
-     * @return Tuple6<Integer, Integer, Float, Long, String, String> This returns a split version of the string
-     */
-    private static class PrefixingMapperTemperature implements
-            MapFunction<String, Tuple5<Integer, Integer, Float, Long, String>> {
-        //        private final String prefix;
-        @Override
-        public Tuple5<Integer, Integer, Float, Long, String> map(String prefix) {
-
-            List<String> items = Arrays.asList(prefix.split("\t"));
-            Float concentration = Float.valueOf(items.get(3));
-
-            return new Tuple5<Integer, Integer, Float, Long, String>(Integer.valueOf(items.get(0)),
-                    Integer.valueOf(items.get(1)), concentration, Long.valueOf(items.get(2))*1000, items.get(4));
-
-        }
-    }
-
 
 
     /**
      * Takes a tuple and converts it back into a string for kafka producer
+     * @param Tuple6<Integer, Integer, Float, Long, String, String> The incoming methane sensor data
      * @return String This is a string version of the tuple
      */
     private static class TupleToString implements
@@ -465,6 +386,7 @@ public class StationStreamProcessor {
 
     /**
      * Does a rolling windowed average on the incoming datastream
+     * @param Tuple6<Integer, Integer, Float, Long, String, String> The incoming methane sensor data
      * @return String This is the value of the average
      */
 
@@ -502,7 +424,8 @@ public class StationStreamProcessor {
             }
 
             //return new Tuple2<Integer, Float>(accumulator.f0, key);
-            return accumulator.f0 + "," + accumulator.f1 + "," + String.valueOf(accumulator.f2) + "," + accumulator.f4;
+            return accumulator.f0 + "," + accumulator.f1 + "," + String.valueOf(accumulator.f2) + "," +
+                    accumulator.f4;
         }
 
         @Override
@@ -518,7 +441,7 @@ public class StationStreamProcessor {
     /**
      * This converts the timestamp from the methane datastream into event time and adjusts the watermark to allow
      * for late or out of order values
-     * @return timestamp This is the timestamp that is used for the event time
+     * @param Tuple6<Integer, Integer, Float, Long, String, String> The incoming methane sensor data
      * @return watermark this is the watermark minus the delay
      */
     public static class BoundedOutOfOrdernessGenerator implements
@@ -547,7 +470,7 @@ public class StationStreamProcessor {
     /**
      * This converts the timestamp from the methane datastream into event time and adjusts the watermark to allow
      * for late or out of order values
-     * @return timestamp This is the timestamp that is used for the event time
+     * @param Tuple5<Integer, Integer, Float, Long, String> The incoming temperature sensor data
      * @return watermark this is the watermark minus the delay
      */
 
@@ -619,7 +542,5 @@ public class StationStreamProcessor {
             }
         }
     }
-
-
 
 }
